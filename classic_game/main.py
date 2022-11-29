@@ -339,6 +339,8 @@ if __name__ == '__main__':
 
     pygame.mixer.init()
     pygame.mixer.music.load('props/sounds/bg_music.mp3')
+    MUSIC_END = pygame.USEREVENT+1
+    pygame.mixer.music.set_endevent(MUSIC_END)
     pygame.mixer.music.play(loops=-1)
 
     sound_dict = get_sound()
@@ -434,6 +436,9 @@ if __name__ == '__main__':
                 # the user must release the button to select other menu options
             if event.type == pygame.MOUSEBUTTONUP and event.button == 1:
                 clicked = False
+            if event.type == MUSIC_END:
+                pygame.mixer.music.play(loops=-1)
+
         # if new best_scores
         if write_values:
             file = open('high_scores.txt', 'w')
